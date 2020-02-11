@@ -1,6 +1,6 @@
 import pandas as pd
-import seaborn as sns
-from pylab import rcParams
+# import seaborn as sns
+#from pylab import rcParams
 import matplotlib.pyplot as plt
 from sklearn import preprocessing
 import numpy as np
@@ -12,7 +12,7 @@ def plot_correlation(filePath, featureColumns):
     # init figure size
     data  = pd.read_csv(filePath, usecols=featureColumns)
     fig = plt.figure()
-    sns.heatmap(data.corr(), annot=True, fmt=".2f")
+    # sns.heatmap(data.corr(), annot=True, fmt=".2f")
     plt.show()
 
 def plot_hist(data):
