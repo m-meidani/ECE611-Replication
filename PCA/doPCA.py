@@ -49,7 +49,7 @@ def doPCA(csvFilePath, featureColumns, targetColumn, applyTransfer= True , outDF
         df = PowerTransformer().fit_transform(df)
     pca = PCA(n_components=0.95, svd_solver='full')
     principalComponents = pca.fit_transform(df)
-    print(principalComponents.shape)
+
     if analyzePCA:
         pca = PCA().fit(dataSet.data)
         print(np.cumsum(pca.explained_variance_ratio_));
@@ -60,13 +60,17 @@ def doPCA(csvFilePath, featureColumns, targetColumn, applyTransfer= True , outDF
 
     if outDF:
         principalDf = pd.DataFrame(data=principalComponents)
-        return principalDf;
+        dataSet.data =  principalDf;
     else:
-        return principalComponents;
+        dataSet.data = principalComponents;
+    # print(dataSet.data.shape);
+    # print(len(dataSet.target);
+
+    return dataSet;
 
 
 
-def applyPCA(argv):
+def applyPCA(argv=[]):
     csvFilePath = [
                    # '../Dataset/IST_MIR.csv',
                    # '../Dataset/IST_MOZ.csv',
