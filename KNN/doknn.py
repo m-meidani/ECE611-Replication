@@ -24,14 +24,15 @@ class DataSet():
 
     def finalizeDataset(self):
         self.data = numpy.array(self.data, dtype=numpy.float64)
-        # scaler = preprocessing.QuantileTransformer(output_distribution='normal', random_state=0)
-        # self.data = scaler.fit_transform(self.data)
+        scaler = preprocessing.QuantileTransformer(output_distribution='normal', random_state=0)
+        self.data = scaler.fit_transform(self.data)
+        # self.data = preprocessing.Normalizer().fit_transform(self.data)
     
     def setFeatureNames(self, featureNames):
         self.featureNames = featureNames
 
 def doKNN(csvFilePath, featureColumns, targetColumn):
-    # plot_correlation(csvFilePath, featureColumns + [targetColumn])
+    plot_correlation(csvFilePath, featureColumns + [targetColumn])
     # plot_densities(csvFilePath, featureColumns + [targetColumn], targetColumn)
     dataSet = DataSet()
     with open(os.path.join('.', csvFilePath), 'r') as csvFile:

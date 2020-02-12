@@ -11,18 +11,19 @@ def plot_correlation(filePath, featureColumns):
     '''
     # init figure size
     data  = pd.read_csv(filePath, usecols=featureColumns)
+    data = np.log(data)
     fig = plt.figure()
     # sns.heatmap(data.corr(), annot=True, fmt=".2f")
     plt.show()
 
 def plot_hist(data):
-    # x = [item[2] for item in data]
+    x = [item[2] for item in data]
     # print(np.log1p(x))
-    # plt.hist(np.log1p(x))
-    scaler = preprocessing.QuantileTransformer(output_distribution='normal', random_state=0)
-    new_data = scaler.fit_transform(data)
-    x = [item[2] for item in new_data]
-    print(plt.hist(x))
+    plt.hist(x)
+    # scaler = preprocessing.QuantileTransformer(output_distribution='normal', random_state=0)
+    # new_data = scaler.fit_transform(data)
+    # x = [item[2] for item in new_data]
+    # print(plt.hist(x))
 
 def plot_densities(filePath, featureColumns, targetColumn):
     '''
