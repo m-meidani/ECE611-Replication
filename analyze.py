@@ -10,13 +10,14 @@ from LR.dolr import doLR
 from KNN.doknn import doKNN
 from PCA.doPCA import applyPCA
 
+PRINCIPLE_COMPONENT_FINDER = applyPCA
 PROJECTS = ['Mirantis', 'Mozilla', 'Openstack', 'Wikimedia']
 ALGORITHMS = [doCART, doKNN, doLR, doNB, doRF]
 
 algorithm_results = {}
 
 for project in PROJECTS:
-    dataSet = applyPCA(project, '.')
+    dataSet = PRINCIPLE_COMPONENT_FINDER(project, '.')
     # Log transform data, note that +1 is to avoid zero values
     dataSet.data = np.log(dataSet.data + 1).to_numpy()
 
