@@ -8,11 +8,12 @@ from NaiveBayes.NB import doNB
 from CART.docart import doCART
 from LR.dolr import doLR
 from KNN.doknn import doKNN
+from extensions.ANN.doann import doANN
 from PCA.doPCA import applyPCA
 
 PRINCIPLE_COMPONENT_FINDER = applyPCA
 PROJECTS = ['Mirantis', 'Mozilla', 'Openstack', 'Wikimedia']
-ALGORITHMS = [doCART, doKNN, doLR, doNB, doRF]
+ALGORITHMS = [doANN, doCART, doKNN, doLR, doNB, doRF]
 
 algorithm_results = {}
 

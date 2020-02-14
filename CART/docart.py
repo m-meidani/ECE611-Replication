@@ -4,12 +4,9 @@ import numpy as np
 
 
 def doCART(X_train, X_test, y_train, y_test, report=False):
-    KthNo = 0
     model = DecisionTreeClassifier().fit(X_train, y_train)
     y_pred = model.predict(X_test)
     if report:
-        KthNo = KthNo+1
-        print("--------CART KFOLD #", KthNo)
         print('number of classes', model.n_classes_)
         print('number of features', model.n_features_)
         print('* metrics:')
