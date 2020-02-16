@@ -13,7 +13,7 @@ from PCA.doPCA import applyPCA
 
 PRINCIPLE_COMPONENT_FINDER = applyPCA
 PROJECTS = ['Mirantis', 'Mozilla', 'Openstack', 'Wikimedia']
-ALGORITHMS = [doANN, doCART, doKNN, doLR, doNB, doRF]
+ALGORITHMS = [doANN, doCART, doKNN, doLR, doNB, doRF, doSVM, doKmeans]
 
 algorithm_results = {}
 
