@@ -1,9 +1,11 @@
 # ECE611-Replication
 
 ### Data Flow
+```
 DataSet -> PCA -> PCA_OUT |
                           | -> Algorithm
 DataSet -> +1 -> Log      |
+```
 
 ### PCA without Standardazion
 ```
