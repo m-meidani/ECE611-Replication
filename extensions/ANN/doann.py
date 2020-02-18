@@ -21,14 +21,7 @@ def doANN(X_train, X_test, y_train, y_test, report=False):
     #training
     mlp = MLPClassifier(hidden_layer_sizes=(13,13,13),max_iter=500)
     mlp.fit(X_train,y_train)
-    MLPClassifier(activation='relu', alpha=0.0001, batch_size='auto', beta_1=0.9,
-        beta_2=0.999, early_stopping=False, epsilon=1e-08,
-        hidden_layer_sizes=(13, 13, 13), learning_rate='constant',
-        learning_rate_init=0.001, max_iter=500, momentum=0.9,
-        nesterovs_momentum=True, power_t=0.5, random_state=None,
-        shuffle=True, solver='adam', tol=0.0001, validation_fraction=0.1,
-        verbose=False, warm_start=False)
-
+    
     #prediction
     y_pred = mlp.predict(X_test)
     precision_score = metrics.precision_score(y_test, y_pred)
