@@ -2,9 +2,9 @@
 
 ### Data Flow
 ```
-DataSet -> PCA -> PCA_OUT |
-                          | -> Algorithm
-DataSet -> +1 -> Log      |
+DataSet -> PCA ->       |
+                        | -> Algorithm
+DataSet -> +1 -> Log -> |
 ```
 
 ### PCA without Standardazion
