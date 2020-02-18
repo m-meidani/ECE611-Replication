@@ -6,6 +6,7 @@ DataSet -> PCA -> PCA_OUT |
 DataSet -> +1 -> Log      |
 
 ### PCA without Standardazion
+```
 [doANN] for Mirantis is {'precision:': 0.6666666666666666, 'accuracy:': 0.6111111111111112, 'auc:': 0.659172077922078, 'recall:': 0.6666666666666666, 'f1_measure:': 0.6666666666666665}
 [doCART] for Mirantis is {'precision:': 0.625, 'accuracy:': 0.6111111111111112, 'auc:': 0.5899038461538462, 'recall:': 0.6, 'f1_measure:': 0.6}
 [doKNN] for Mirantis is {'precision:': 0.8660714285714286, 'accuracy:': 0.7777777777777778, 'auc:': 0.7875, 'recall:': 0.7777777777777778, 'f1_measure:': 0.7777777777777778}
@@ -30,8 +31,10 @@ DataSet -> +1 -> Log      |
 [doLR] for Wikimedia is {'precision:': 0.7142857142857143, 'accuracy:': 0.6896551724137931, 'auc:': 0.6862745098039216, 'recall:': 0.7142857142857143, 'f1_measure:': 0.7061900610287706}
 [doNB] for Wikimedia is {'precision:': 0.75, 'accuracy:': 0.6666666666666666, 'auc:': 0.6706800144300145, 'recall:': 0.5625, 'f1_measure:': 0.6428571428571428}
 [doRF] for Wikimedia is {'precision:': 0.7029411764705882, 'accuracy:': 0.6333333333333333, 'auc:': 0.6466346153846154, 'recall:': 0.625, 'f1_measure:': 0.6451612903225806}
+```
 
 ### PCA with Standardazion
+```
 [doANN] for Mirantis is {'precision:': 0.6833333333333333, 'accuracy:': 0.6666666666666666, 'auc:': 0.64005994005994, 'recall:': 0.6363636363636364, 'f1_measure:': 0.6381818181818182}
 [doCART] for Mirantis is {'precision:': 0.6306818181818181, 'accuracy:': 0.6111111111111112, 'auc:': 0.6038961038961039, 'recall:': 0.5555555555555556, 'f1_measure:': 0.6}
 [doKNN] for Mirantis is {'precision:': 0.8660714285714286, 'accuracy:': 0.7777777777777778, 'auc:': 0.7875, 'recall:': 0.7777777777777778, 'f1_measure:': 0.7777777777777778}
@@ -56,7 +59,9 @@ DataSet -> +1 -> Log      |
 [doLR] for Wikimedia is {'precision:': 0.7142857142857143, 'accuracy:': 0.6896551724137931, 'auc:': 0.6862745098039216, 'recall:': 0.7142857142857143, 'f1_measure:': 0.7061900610287706}
 [doNB] for Wikimedia is {'precision:': 0.75, 'accuracy:': 0.6666666666666666, 'auc:': 0.6706800144300145, 'recall:': 0.5625, 'f1_measure:': 0.6428571428571428}
 [doRF] for Wikimedia is {'precision:': 0.7058823529411765, 'accuracy:': 0.6333333333333333, 'auc:': 0.6503817873303167, 'recall:': 0.6153846153846154, 'f1_measure:': 0.6451612903225806}
+```
 ### KPCA
+```
 [doANN] for Mirantis is {'precision:': 0.6666666666666666, 'accuracy:': 0.6666666666666666, 'auc:': 0.638011988011988, 'recall:': 0.6363636363636364, 'f1_measure:': 0.6666666666666665}
 [doCART] for Mirantis is {'precision:': 0.625, 'accuracy:': 0.6111111111111112, 'auc:': 0.61875, 'recall:': 0.6, 'f1_measure:': 0.6}
 [doKNN] for Mirantis is {'precision:': 0.8660714285714286, 'accuracy:': 0.7777777777777778, 'auc:': 0.7875, 'recall:': 0.7777777777777778, 'f1_measure:': 0.7777777777777778}
@@ -81,3 +86,4 @@ DataSet -> +1 -> Log      |
 [doLR] for Wikimedia is {'precision:': 0.7142857142857143, 'accuracy:': 0.6896551724137931, 'auc:': 0.6862745098039216, 'recall:': 0.7142857142857143, 'f1_measure:': 0.7061900610287706}
 [doNB] for Wikimedia is {'precision:': 0.75, 'accuracy:': 0.6666666666666666, 'auc:': 0.6706800144300145, 'recall:': 0.5625, 'f1_measure:': 0.6428571428571428}
 [doRF] for Wikimedia is {'precision:': 0.6899038461538461, 'accuracy:': 0.6551724137931034, 'auc:': 0.6565072182719242, 'recall:': 0.6055555555555556, 'f1_measure:': 0.6428571428571429}
+```
