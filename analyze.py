@@ -12,6 +12,7 @@ from NaiveBayes.NB import doNB
 from CART.docart import doCART
 from LR.dolr import doLR
 from KNN.doknn import doKNN
+from SVM.SVM import doSVM
 from extensions.ANN.doann import doANN
 from SVM.SVM import doSVM
 from Kmeans.Kmeans import doKmeans
