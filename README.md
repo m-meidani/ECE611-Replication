@@ -2,37 +2,31 @@
 
 ### Data Flow
 ```
-DataSet -> PCA ->       |
-                        | -> Algorithm
-DataSet -> +1 -> Log -> |
+DataSet -> +1 -> Log -> PCA -> Algorithm
 ```
 
 ### PCA without Standardazion
 ```
-[doANN] for Mirantis is {'precision:': 0.6666666666666666, 'accuracy:': 0.6111111111111112, 'auc:': 0.659172077922078, 'recall:': 0.6666666666666666, 'f1_measure:': 0.6666666666666665}
-[doCART] for Mirantis is {'precision:': 0.625, 'accuracy:': 0.6111111111111112, 'auc:': 0.5899038461538462, 'recall:': 0.6, 'f1_measure:': 0.6}
-[doKNN] for Mirantis is {'precision:': 0.8660714285714286, 'accuracy:': 0.7777777777777778, 'auc:': 0.7875, 'recall:': 0.7777777777777778, 'f1_measure:': 0.7777777777777778}
-[doLR] for Mirantis is {'precision:': 0.7071428571428571, 'accuracy:': 0.6666666666666666, 'auc:': 0.7012987012987013, 'recall:': 0.7142857142857143, 'f1_measure:': 0.7058823529411764}
-[doNB] for Mirantis is {'precision:': 0.7777777777777778, 'accuracy:': 0.6666666666666666, 'auc:': 0.6753246753246753, 'recall:': 0.5833333333333334, 'f1_measure:': 0.6666666666666666}
-[doRF] for Mirantis is {'precision:': 0.7142857142857143, 'accuracy:': 0.6666666666666666, 'auc:': 0.6625, 'recall:': 0.625, 'f1_measure:': 0.6363636363636365}
-[doANN] for Mozilla is {'precision:': 0.7083333333333334, 'accuracy:': 0.7155172413793103, 'auc:': 0.7070165311092731, 'recall:': 0.6324561403508772, 'f1_measure:': 0.6666666666666666}
-[doCART] for Mozilla is {'precision:': 0.7047930283224402, 'accuracy:': 0.7241379310344828, 'auc:': 0.7204301075268815, 'recall:': 0.68, 'f1_measure:': 0.6896551724137931}
-[doKNN] for Mozilla is {'precision:': 0.8333333333333334, 'accuracy:': 0.7586206896551724, 'auc:': 0.740430402930403, 'recall:': 0.6978260869565217, 'f1_measure:': 0.7037037037037038}
-[doLR] for Mozilla is {'precision:': 0.7272727272727273, 'accuracy:': 0.7241379310344828, 'auc:': 0.7090909090909091, 'recall:': 0.6141439205955335, 'f1_measure:': 0.6602564102564101}
-[doNB] for Mozilla is {'precision:': 0.6842105263157895, 'accuracy:': 0.6724137931034483, 'auc:': 0.6668669871794872, 'recall:': 0.5217391304347826, 'f1_measure:': 0.5895390070921986}
-[doRF] for Mozilla is {'precision:': 0.729020979020979, 'accuracy:': 0.7413793103448276, 'auc:': 0.7435497835497835, 'recall:': 0.6909814323607427, 'f1_measure:': 0.7058823529411765}
-[doANN] for Openstack is {'precision:': 0.7361874236874237, 'accuracy:': 0.6884057971014492, 'auc:': 0.675928700499701, 'recall:': 0.7349397590361446, 'f1_measure:': 0.7339525129203806}
-[doCART] for Openstack is {'precision:': 0.7078252032520325, 'accuracy:': 0.6594202898550725, 'auc:': 0.6454207164252095, 'recall:': 0.7078252032520325, 'f1_measure:': 0.7076958036661112}
-[doKNN] for Openstack is {'precision:': 0.803030303030303, 'accuracy:': 0.7292513815034929, 'auc:': 0.7279879691927885, 'recall:': 0.7738095238095238, 'f1_measure:': 0.7687961755758366}
-[doLR] for Openstack is {'precision:': 0.6539115646258503, 'accuracy:': 0.6231884057971014, 'auc:': 0.5962480534830051, 'recall:': 0.758098223615465, 'f1_measure:': 0.6997144022847817}
-[doNB] for Openstack is {'precision:': 0.7604347826086957, 'accuracy:': 0.5869565217391305, 'auc:': 0.6209714389062776, 'recall:': 0.4233031674208145, 'f1_measure:': 0.5490280511811023}
-[doRF] for Openstack is {'precision:': 0.7349397590361446, 'accuracy:': 0.6739130434782609, 'auc:': 0.6667375852616817, 'recall:': 0.706599713055954, 'f1_measure:': 0.7197560975609756}
-[doANN] for Wikimedia is {'precision:': 0.6875, 'accuracy:': 0.6333333333333333, 'auc:': 0.6313988095238096, 'recall:': 0.6339712918660287, 'f1_measure:': 0.6576576576576576}
-[doCART] for Wikimedia is {'precision:': 0.6666666666666666, 'accuracy:': 0.6333333333333333, 'auc:': 0.6338383838383839, 'recall:': 0.6568627450980392, 'f1_measure:': 0.6666666666666666}
-[doKNN] for Wikimedia is {'precision:': 0.861904761904762, 'accuracy:': 0.7333333333333333, 'auc:': 0.7532096171802054, 'recall:': 0.7303030303030302, 'f1_measure:': 0.7333333333333334}
-[doLR] for Wikimedia is {'precision:': 0.7142857142857143, 'accuracy:': 0.6896551724137931, 'auc:': 0.6862745098039216, 'recall:': 0.7142857142857143, 'f1_measure:': 0.7061900610287706}
-[doNB] for Wikimedia is {'precision:': 0.75, 'accuracy:': 0.6666666666666666, 'auc:': 0.6706800144300145, 'recall:': 0.5625, 'f1_measure:': 0.6428571428571428}
-[doRF] for Wikimedia is {'precision:': 0.7029411764705882, 'accuracy:': 0.6333333333333333, 'auc:': 0.6466346153846154, 'recall:': 0.625, 'f1_measure:': 0.6451612903225806}
+[doCART] for Mirantis is {'precision:': 0.6666666666666666, 'accuracy:': 0.6111111111111112, 'auc:': 0.6274350649350651, 'recall:': 0.625, 'f1_measure:': 0.6666666666666665}
+[doKNN] for Mirantis is {'precision:': 0.8571428571428571, 'accuracy:': 0.7777777777777778, 'auc:': 0.7916666666666667, 'recall:': 0.8090909090909091, 'f1_measure:': 0.7913043478260868}
+[doLR] for Mirantis is {'precision:': 0.75, 'accuracy:': 0.7222222222222222, 'auc:': 0.7104166666666667, 'recall:': 0.6306818181818181, 'f1_measure:': 0.7007672634271099}
+[doNB] for Mirantis is {'precision:': 0.8, 'accuracy:': 0.6666666666666666, 'auc:': 0.7044955044955046, 'recall:': 0.5916666666666667, 'f1_measure:': 0.6666666666666667}
+[doRF] for Mirantis is {'precision:': 0.7142857142857143, 'accuracy:': 0.6666666666666666, 'auc:': 0.6529220779220779, 'recall:': 0.625, 'f1_measure:': 0.6666666666666665}
+[doCART] for Mozilla is {'precision:': 0.6818181818181818, 'accuracy:': 0.7068965517241379, 'auc:': 0.7074561403508772, 'recall:': 0.68, 'f1_measure:': 0.6723163841807911}
+[doKNN] for Mozilla is {'precision:': 0.8, 'accuracy:': 0.7413793103448276, 'auc:': 0.7413793103448276, 'recall:': 0.7362318840579709, 'f1_measure:': 0.7130750605326877}
+[doLR] for Mozilla is {'precision:': 0.7247474747474747, 'accuracy:': 0.6896551724137931, 'auc:': 0.661904761904762, 'recall:': 0.4654761904761905, 'f1_measure:': 0.5714285714285714}
+[doNB] for Mozilla is {'precision:': 0.6818181818181818, 'accuracy:': 0.6637931034482758, 'auc:': 0.65218837535014, 'recall:': 0.49193548387096775, 'f1_measure:': 0.5714285714285714}
+[doRF] for Mozilla is {'precision:': 0.6939799331103679, 'accuracy:': 0.7068965517241379, 'auc:': 0.7121635610766046, 'recall:': 0.6609195402298851, 'f1_measure:': 0.6666666666666667}
+[doCART] for Openstack is {'precision:': 0.6790123456790124, 'accuracy:': 0.6281670315921176, 'auc:': 0.6134085213032582, 'recall:': 0.683899433899434, 'f1_measure:': 0.6798796441653585}
+[doKNN] for Openstack is {'precision:': 0.7720779220779221, 'accuracy:': 0.7028985507246377, 'auc:': 0.6961534057449453, 'recall:': 0.7577232004942849, 'f1_measure:': 0.7423266674198772}
+[doLR] for Openstack is {'precision:': 0.7034640274076893, 'accuracy:': 0.6402877697841727, 'auc:': 0.6377675910721887, 'recall:': 0.6666666666666666, 'f1_measure:': 0.6832355665328806}
+[doNB] for Openstack is {'precision:': 0.7596296296296297, 'accuracy:': 0.644927536231884, 'auc:': 0.6571934887724362, 'recall:': 0.5625, 'f1_measure:': 0.6400551314673452}
+[doRF] for Openstack is {'precision:': 0.6951600893521965, 'accuracy:': 0.6376811594202898, 'auc:': 0.6299246462580594, 'recall:': 0.6851456458746378, 'f1_measure:': 0.6799999999999999}
+[doCART] for Wikimedia is {'precision:': 0.6470588235294118, 'accuracy:': 0.6, 'auc:': 0.606456043956044, 'recall:': 0.6282894736842105, 'f1_measure:': 0.6451612903225806}
+[doKNN] for Wikimedia is {'precision:': 0.8571428571428571, 'accuracy:': 0.7666666666666667, 'auc:': 0.7650297619047619, 'recall:': 0.7633053221288515, 'f1_measure:': 0.7576887232059646}
+[doLR] for Wikimedia is {'precision:': 0.75, 'accuracy:': 0.6666666666666666, 'auc:': 0.6706800144300145, 'recall:': 0.625, 'f1_measure:': 0.6666666666666666}
+[doNB] for Wikimedia is {'precision:': 0.7692307692307693, 'accuracy:': 0.6666666666666666, 'auc:': 0.6741071428571428, 'recall:': 0.5714285714285714, 'f1_measure:': 0.6666666666666665}
+[doRF] for Wikimedia is {'precision:': 0.6666666666666666, 'accuracy:': 0.6, 'auc:': 0.6178571428571429, 'recall:': 0.6055555555555556, 'f1_measure:': 0.6267857142857143}
 ```
 
 ### PCA with Standardazion

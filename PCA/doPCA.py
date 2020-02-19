@@ -24,7 +24,7 @@ class DataSet():
     components = None
     target = None
 
-def doPCA(data, featureColumns, targetColumn, applyTransfer= True , outDF = False, analyzePCA=False, standardize=False):
+def doPCA(data, featureColumns, targetColumn, applyTransfer= False , outDF = False, analyzePCA=False, standardize=False):
     dataSet = DataSet()
     # Remove target column
     df = data.iloc[:,:12]
@@ -34,6 +34,8 @@ def doPCA(data, featureColumns, targetColumn, applyTransfer= True , outDF = Fals
         df = PowerTransformer(standardize=False).fit_transform(df)
     if standardize:
         df = StandardScaler().fit_transform(df)
+    
+    df = np.log(df + 1)
     pca = PCA(n_components=0.95, svd_solver='full')
     principalComponents = pca.fit_transform(df)
 
