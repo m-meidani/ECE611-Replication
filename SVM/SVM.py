@@ -29,5 +29,5 @@ def doSVM(X_train, X_test, y_train, y_test, report=False):
     scores_list.append(metrics.accuracy_score(y_test, y_pred))
 
     return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score,
-            'f1_measure': f1_score}
+            'f1_measure': f1_score, 'algorithm' : clf}
 

@@ -35,4 +35,4 @@ def doKNN(X_train, X_test, y_train, y_test):
         f1_score.append(metrics.f1_score(y_test, y_pred))
 
         # print(metrics.classification_report(y_test, y_pred))
-    return {'precision': max(precision_score), 'accuracy': max(scores_list), 'auc': max(auc_score), 'recall': max(recall_score), 'f1_measure': max(f1_score)}
+    return {'precision': max(precision_score), 'accuracy': max(scores_list), 'auc': max(auc_score), 'recall': max(recall_score), 'f1_measure': max(f1_score), 'algorithm' : knn}

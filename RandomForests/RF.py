@@ -26,4 +26,4 @@ def doRF(X_train, X_test, y_train, y_test, report=False):
     f1_score.append(metrics.f1_score(y_test, y_pred))
     scores_list.append(metrics.accuracy_score(y_test, y_pred))
 
-    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score}
+    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score, 'algorithm' : rf}

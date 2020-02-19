@@ -2,6 +2,7 @@ import sys
 import numpy
 import csv
 import os
+import pickle
 import pandas as pd
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import PowerTransformer, StandardScaler
@@ -12,7 +13,7 @@ PROJECT_FILE_NAME = {
     'Mirantis' : 'IST_MIR.csv',
     'Mozilla'  : 'IST_MOZ.csv',
     'Openstack': 'IST_OST.csv',
-    'Wikimedia': 'IST_WIK.csv'
+    'Wikimedia': 'IST_WIK.csv',
 }
 
 CSV_FEATURE_COLUMNS = ['URL', 'File', 'Lines_of_code', 'Require', 'Ensure', 'Include', 'Attribute',
@@ -37,7 +38,8 @@ def doPCA(data, featureColumns, targetColumn, applyTransfer= False , outDF = Fal
     
     df = np.log(df + 1)
     pca = PCA(n_components=0.95, svd_solver='full')
-    principalComponents = pca.fit_transform(df)
+    pca.fit(df)
+    principalComponents = pca.transform(df)
 
     if analyzePCA:
         pca = PCA().fit(dataSet.data)
@@ -56,15 +58,13 @@ def doPCA(data, featureColumns, targetColumn, applyTransfer= False , outDF = Fal
     # print(dataSet.data.shape)
     # print(len(dataSet.target)
 
-    return dataSet
+    return dataSet, pca
 
 def getData(projectName, appDirectory):
     if(projectName not in PROJECT_FILE_NAME):
         raise RuntimeError('INVALID FILE NAME')
 
-    data = pd.read_csv(os.path.join(appDirectory, 'Dataset', PROJECT_FILE_NAME[projectName]),
-     usecols=CSV_FEATURE_COLUMNS + [CSV_TARGET_COLUMNS])
-    
+    data = pd.read_csv(os.path.join(appDirectory, 'Dataset', PROJECT_FILE_NAME[projectName]),usecols=CSV_FEATURE_COLUMNS + [CSV_TARGET_COLUMNS])
     return data
 
 def applyPCA(projectName, appDirectory):
@@ -73,6 +73,6 @@ def applyPCA(projectName, appDirectory):
 def applyPCAWithStandardize(projectName, appDirectory):
     return doPCA(getData(projectName, appDirectory), CSV_FEATURE_COLUMNS, CSV_TARGET_COLUMNS, False, False, False, True)
 
-if __name__ == "__main__":
-    print(applyPCA(sys.argv[1], '..'))
+# if __name__ == "__main__":
+#     print(applyPCA(sys.argv[1], '..'))
 

@@ -10,7 +10,7 @@ from sklearn import metrics
 # X = wine.drop('Cultivator',axis=1)
 # y = wine['Cultivator']
 #train-test  split
-def doANN(X_train, X_test, y_train, y_test, report=False):
+def doANN(X_train, X_test, y_train, y_test, externalTest=False ,report=False):
     #preprocess
     scaler=StandardScaler()
     scaler.fit(X_train)
@@ -42,7 +42,7 @@ def doANN(X_train, X_test, y_train, y_test, report=False):
         print("auc_score:", auc_score)
         print("recall_score:", recall_score)
         print("f1_score:", f1_score)
-    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score}
+    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score, 'algorithm' : mlp}
     
 
 

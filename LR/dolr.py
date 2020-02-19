@@ -26,4 +26,4 @@ def doLR(X_train, X_test, y_train, y_test, report=False):
     recall_score.append(metrics.recall_score(y_test, y_pred))
     f1_score.append(metrics.f1_score(y_test, y_pred))
 
-    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score}
+    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score, 'algorithm' : logisticRegr}

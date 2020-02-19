@@ -15,7 +15,8 @@ def doKmeans(X_train, X_test, y_train, y_test, report=False):
     recall_score = []
     f1_score = []
     kmeans = KMeans(n_clusters=2, init='k-means++', max_iter=300, n_init=10, random_state=0)
-    y_pred = kmeans.fit_predict(X_test)
+    kmeans.fit(X_train,y_train);
+    y_pred = kmeans.predict(X_test)
     precision_score.append(metrics.precision_score(y_test, y_pred))
     try:
         auc_score.append(metrics.roc_auc_score(y_test, y_pred))
@@ -27,5 +28,5 @@ def doKmeans(X_train, X_test, y_train, y_test, report=False):
     scores_list.append(metrics.accuracy_score(y_test, y_pred))
 
     return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score,
-            'f1_measure': f1_score}
+            'f1_measure': f1_score, 'algorithm' : kmeans}
 

@@ -4,17 +4,32 @@ import os
 import sys
 import time
 
-table_name='old_new_puppet'
+table_name='no_defect_puppets'
 clmns={
-    'id':'varchar(50)'
+    'id':'varchar(50)',
+    'size':'varchar(20)',
+    'binary':'varchar(10)',
+    'copies':'varchar(10)',
 }
 
 con = sqlite3.Connection('newdb.sqlite')
 cur = con.cursor()
 
 
+maxInt = sys.maxsize
 
-with open('./external_validity/res.csv', newline='') as csvfile:
+while True:
+    # decrease the maxInt value by factor 10 
+    # as long as the OverflowError occurs.
+
+    try:
+        csv.field_size_limit(maxInt)
+        break
+    except OverflowError:
+        maxInt = int(maxInt/10)
+
+
+with open('./external_validity/valid-puppets.csv', newline='') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=',')
     columns=spamreader.__next__()
     index=0;
@@ -36,9 +51,13 @@ with open('./external_validity/res.csv', newline='') as csvfile:
         insertValues=insertValues
         query='INSERT INTO {} ({}) VALUES({});'.format(table_name,','.join(columns),"'"+insertValues.strip("','")+"'");
         # print(query);
-        cur.execute(query);
+        try:
+            cur.execute(query);
+        except:
+            print(query);
+            sys.exit();
         con.commit()
-        time.sleep(0.1);
+        # time.sleep(0.1);
 print('{} record added successfully!'.format(index));
 cur.close()
 con.close()
