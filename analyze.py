@@ -45,9 +45,7 @@ for project in PROJECTS:
         validMinedDataComponents = DimensionReductionModel.transform(validMinedData);
         expectedResult = np.concatenate((np.ones(minedDataComponents.shape[0]),np.zeros(validMinedDataComponents.shape[0])),axis=0);
         totalMinedData = np.concatenate((minedDataComponents,validMinedDataComponents),axis=0);
-        
-        # extExpectedOut= np.ones(external_pred.shape);
-        # allMinedData = 
+
     # Log transform data, note that +1 is to avoid zero values
     # dataSet.data = np.log(dataSet.data + 1).to_numpy()
     for algorithm in ALGORITHMS:
@@ -75,10 +73,7 @@ for project in PROJECTS:
             
             if checkExternalValidity:
                 external_pred = trainedModel.predict(totalMinedData)
-                # print();
-                # os.exit();
-                # print("results:")
-                # print(np.sum(external_pred));
+
                 ext_precision_score.append(metrics.precision_score(expectedResult, external_pred))
                 try:
                     ext_auc_score.append(metrics.roc_auc_score(expectedResult, external_pred))
