@@ -18,15 +18,56 @@ plot(vcobj)
 thresh = 0.7
 abline(h = 1 - thresh, col="grey", lty=2)
 
-``` We remove Lines_of_code, Include, File_mode ```
+``` We remove Attribute, Hard_coded_string, Ensure, Require, File_mode, SSH_KEY ```
 
 # Redundancy analysis
-redun_obj = redun(~ URL + File + Require + Ensure + Attribute + Hard_coded_string + Comment + Command + SSH_KEY, data=data, nk=5)
+redun_obj = redun(~ URL+File+Lines_of_code+Include+Comment+Command, data=data, nk=5)
+paste(redun_obj$Out, collapse=",␣")
 
-``` We remove SSH_KEY and Attribute ```
+``` Nothing reported by the analysis ```
 
 Out budget is 6
 
+# Budget assignment
+
+spearman2_obj = spearman2(defect_status ~ URL+File+Lines_of_code+Include+Comment+Command, data=data, p=2)
+
 # Fitting the model
 
-fit = lrm(defect_status ~ rcs(Hard_coded_string, 3) + URL + File + Require + Comment + Command, data = data, x=T, y=T)
+fit = lrm(defect_status ~ rcs(Lines_of_code, 3) + File + Comment + Command + Include + Command + URL, data = data, x=T, y=T)
+dd <- datadist(data)
+options(datadist="dd")
+
+
+
+# Logistic Regression Model Results
+```
+ lrm(formula = defect_status ~ rcs(Lines_of_code, 3) + File + 
+     Comment + Command + Include + Command + URL, data = data, 
+     x = T, y = T)
+ 
+                       Model Likelihood     Discrimination    Rank Discrim.    
+                          Ratio Test           Indexes           Indexes       
+ Obs           180    LR chi2      45.68    R2       0.299    C       0.773    
+  0             84    d.f.             7    g        1.533    Dxy     0.547    
+  1             96    Pr(> chi2) <0.0001    gr       4.632    gamma   0.548    
+ max |deriv| 8e-08                          gp       0.269    tau-a   0.274    
+                                            Brier    0.194                     
+ 
+                Coef    S.E.   Wald Z Pr(>|Z|)
+ Intercept      -1.1606 0.3664 -3.17  0.0015  
+ Lines_of_code   0.0239 0.0089  2.70  0.0070  
+ Lines_of_code' -0.0245 0.0184 -1.34  0.1817  
+ File            0.2430 0.1473  1.65  0.0989  
+ Comment        -0.0218 0.0145 -1.50  0.1333  
+ Command         0.4750 0.3284  1.45  0.1480  
+ Include        -0.0610 0.0508 -1.20  0.2297  
+ URL            -0.0534 0.1866 -0.29  0.7746  
+ ```
+
+
+ logit2prob <- function(logit){
+     odds <- exp(logit)
+     prob <- odds / (1 + odds)
+     return(prob)
+}

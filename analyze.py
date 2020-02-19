@@ -14,14 +14,14 @@ from PCA.doKPCA import applyKPCA
 
 PRINCIPLE_COMPONENT_FINDER = applyKPCA
 PROJECTS = ['Mirantis', 'Mozilla', 'Openstack', 'Wikimedia']
-ALGORITHMS = [doANN, doCART, doKNN, doLR, doNB, doRF, doSVM, doKmeans]
+ALGORITHMS = [doCART, doKNN, doLR, doNB, doRF]
 
 algorithm_results = {}
 
 for project in PROJECTS:
     dataSet = PRINCIPLE_COMPONENT_FINDER(project, '.')
     # Log transform data, note that +1 is to avoid zero values
-    dataSet.data = np.log(dataSet.data + 1).to_numpy()
+    # dataSet.components = np.log(dataSet.components + 1)
 
     for algorithm in ALGORITHMS:
         precision_score = []
@@ -31,8 +31,8 @@ for project in PROJECTS:
         f1_score = []
         
         rkf = RepeatedKFold(n_splits=10, n_repeats=10, random_state=2652124)
-        for train_index, test_index in rkf.split(dataSet.data):
-            X_train, X_test, y_train, y_test = dataSet.data[train_index], dataSet.data[test_index], dataSet.target[train_index], dataSet.target[test_index]
+        for train_index, test_index in rkf.split(dataSet.components):
+            X_train, X_test, y_train, y_test = dataSet.components[train_index], dataSet.components[test_index], dataSet.target[train_index], dataSet.target[test_index]
             result = algorithm(X_train, X_test, y_train, y_test)
             precision_score.append(result.get('precision'))
             scores_list.append(result.get('accuracy'))
