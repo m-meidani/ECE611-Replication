@@ -14,6 +14,7 @@ PROJECT_FILE_NAME = {
     'Mozilla'  : 'IST_MOZ.csv',
     'Openstack': 'IST_OST.csv',
     'Wikimedia': 'IST_WIK.csv',
+    'MinedData': ['MinedData.pckl','ValidMinedData.pckl'],
 }
 
 CSV_FEATURE_COLUMNS = ['URL', 'File', 'Lines_of_code', 'Require', 'Ensure', 'Include', 'Attribute',
@@ -64,7 +65,17 @@ def getData(projectName, appDirectory):
     if(projectName not in PROJECT_FILE_NAME):
         raise RuntimeError('INVALID FILE NAME')
 
-    data = pd.read_csv(os.path.join(appDirectory, 'Dataset', PROJECT_FILE_NAME[projectName]),usecols=CSV_FEATURE_COLUMNS + [CSV_TARGET_COLUMNS])
+    if isinstance(PROJECT_FILE_NAME[projectName], str):
+        data = pd.read_csv(os.path.join(appDirectory, 'Dataset', PROJECT_FILE_NAME[projectName]),usecols=CSV_FEATURE_COLUMNS + [CSV_TARGET_COLUMNS])
+    else:
+        frame=[];
+        for file in PROJECT_FILE_NAME[projectName]:
+            f = open(os.path.join(appDirectory, 'Dataset',file), 'rb')
+            frame.append(pd.DataFrame(pickle.load(f)))
+            f.close();
+        data = pd.concat(frame)
+        data = data.drop(['ID'],axis=1);
+        # print(data.keys());
     return data
 
 def applyPCA(projectName, appDirectory):

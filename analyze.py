@@ -20,9 +20,9 @@ from PCA.doPCA import applyPCA, applyPCAWithStandardize
 from PCA.doKPCA import applyKPCA
 
 PRINCIPLE_COMPONENT_FINDER = applyPCA#applyKPCA
-PROJECTS = ['Mirantis', 'Mozilla', 'Openstack', 'Wikimedia']
-ALGORITHMS = [doANN, doCART, doKNN, doLR, doNB, doRF, doSVM, doKmeans]
-checkExternalValidity= True
+PROJECTS = ['MinedData','Mirantis', 'Mozilla', 'Openstack', 'Wikimedia']
+ALGORITHMS = [ doCART, doKNN, doLR, doNB, doRF, doSVM, doKmeans,doANN]
+checkExternalValidity= False
 appDirectory='.'
 
 if checkExternalValidity:

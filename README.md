@@ -154,3 +154,16 @@ External Validity [doSVM] for the model trained by Wikimedia is {'external test 
 [doKmeans] for Wikimedia is {'precision:': 0.6666666666666666, 'accuracy:': 0.6, 'auc:': 0.6126217532467532, 'recall:': 0.5358974358974359, 'f1_measure:': 0.5760368663594471}
 External Validity [doKmeans] for the model trained by Wikimedia is {'external test precision:': 0.5136087095741274, 'external test accuracy:': 0.5247236765561373, 'external test auc:': 0.5247236765561373, 'external test recall:': 0.9331006399069226, 'external test f1_measure:': 0.6626730014459823}
 ```
+###External Data
+```
+[doCART] for MinedData is {'precision:': 0.6480237462896423, 'accuracy:': 0.6564767102854431, 'auc:': 0.6573942903679229, 'recall:': 0.6839131727624146,
+'f1_measure:': 0.6639432102331024}
+[doKNN] for MinedData is {'precision:': 0.6991379310344827, 'accuracy:': 0.6744186046511628, 'auc:': 0.6756547109933971, 'recall:': 0.7376175228232729, 'f1_measure:': 0.6903141751042287}
+[doLR] for MinedData is {'precision:': 0.5930738522954092, 'accuracy:': 0.5901162790697675, 'auc:': 0.5892107248602193, 'recall:': 0.5507575757575758, 'f1_measure:': 0.5701501786104834}
+[doNB] for MinedData is {'precision:': 0.5687062937062937, 'accuracy:': 0.5749627093362262, 'auc:': 0.5748707547829901, 'recall:': 0.6332347140039447, 'f1_measure:': 0.6022413360120542}
+[doRF] for MinedData is {'precision:': 0.6930288461538461, 'accuracy:': 0.6947674418604651, 'auc:': 0.6953115552975888, 'recall:': 0.7057189542483661, 'f1_measure:': 0.6976110512641784}
+[doSVM] for MinedData is {'precision:': 0.6086956521739131, 'accuracy:': 0.5872093023255814, 'auc:': 0.5863689506352996, 'recall:': 0.49582527401676335,
+'f1_measure:': 0.545875926002566}
+[doKmeans] for MinedData is {'precision:': 0.51, 'accuracy:': 0.5232558139534884, 'auc:': 0.525835618133699, 'recall:': 0.5028901734104047, 'f1_measure:': 0.5120475131354156}
+[doANN] for MinedData is {'precision:': 0.6480822088955522, 'accuracy:': 0.6482558139534884, 'auc:': 0.6486929188288912, 'recall:': 0.6686052409129333, 'f1_measure:': 0.6569701069722211}
+```
