@@ -9,7 +9,7 @@ import pickle
 import os
 import pandas as pd
 from sklearn import metrics
-
+import time
 from RandomForests.RF import doRF
 from sklearn.ensemble import RandomForestClassifier
 from NaiveBayes.NB import doNB
@@ -34,7 +34,7 @@ import os
 PRINCIPLE_COMPONENT_FINDER = applyPCA
 PROJECTS = ['Mirantis', 'Mozilla', 'Openstack', 'Wikimedia']
 score = 'roc_auc'
-ALGORITHMS_NAME=[doNB,doRF,doLR,doKNN,doCART]
+ALGORITHMS_NAME=[doLR,doCART,doKNN,doNB,doRF]
 ALGORITHMS = { 
     doCART.__name__: DecisionTreeClassifier, 
     doNB.__name__: GaussianNB,  
@@ -61,10 +61,10 @@ for algo in ALGORITHMS_NAME:
             doCART.__name__:{
                 'criterion':['gini','entropy'],
                 'splitter':['best', 'random'],
-                'min_samples_split':[2,5,8,10,50,100],
-                'min_samples_leaf':[1,3,6,10,50,100],
-                'min_weight_fraction_leaf':[0.0001, 0.001, 0.01, 0.1, 0.3, 0.49],
-                'max_features': ['log2','sqrt',None,4,6,9,11],
+                'min_samples_split':[2,5,8,10,100],
+                'min_samples_leaf':[1,3,6,10,100],
+                'min_weight_fraction_leaf':[0.0001, 0.001, 0.01, 0.1, 0.49],
+                'max_features': ['log2','sqrt',None],
                 # 'max_features': ['log2','sqrt',None,*list(range(1,dataSet.components.shape[1],2))],
             },
             doNB.__name__:{
@@ -79,21 +79,21 @@ for algo in ALGORITHMS_NAME:
                 'penalty':['l1', 'l2', 'elasticnet'],
                 'dual':[True,False],
                 'tol':[1e-5,1e-4,1e-3,1e-2,1e-1], #
-                'C': [0.001, 0.1, 1, 10, 100, 1000], #
+                'C': [0.001, 0.1, 1, 10, 100], #
                 'fit_intercept':[True,False], 
                 'solver':['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'], 
                 'max_iter':[50,100,150,200],
-                'l1_ratio':[1e-5,1e-3,1e-1,0.2,0.5],
+                'l1_ratio':[1e-5,1e-3,1e-1,0.5],
             },
             doRF.__name__:{
                 'n_estimators':[*list(range(10,50,10))], ##
                 'criterion':['gini','entropy'],
-                'min_samples_split':[2,5,8,10,50,100],
+                'min_samples_split':[2,5,8,10,100],
                 # 'min_samples_split':[2,4,6,8,10], #
-                'min_samples_leaf':[1,3,6,10,50,100],
+                'min_samples_leaf':[1,3,6,10,100],
                 # 'min_samples_leaf':[1,2,3,4,5,6],   #
-                'min_weight_fraction_leaf':[0.0001, 0.001, 0.01, 0.1, 0.3, 0.49], 
-                'max_features': ['log2','sqrt',None,4,6,9,11],
+                'min_weight_fraction_leaf':[0.0001, 0.001, 0.01, 0.1, 0.49], 
+                'max_features': ['log2','sqrt',None],
             }
         }
         precision_score = []
@@ -109,9 +109,14 @@ for algo in ALGORITHMS_NAME:
         f1_score_no_optim = []
 
         rkf = RepeatedKFold(n_splits=10, n_repeats=10, random_state=2652124)
-        for train_index, test_index in rkf.split(dataSet.components):            
+        i=0
+
+        for train_index, test_index in rkf.split(dataSet.components):     
+            startTime=time.time()
+            i+=1
+            print('round:',i)
             X_train, X_test, y_train, y_test = dataSet.components[train_index], dataSet.components[test_index], dataSet.target[train_index], dataSet.target[test_index]    
-            clf = GridSearchCV(algorithm(), param_grid = GRID_VALUES[algo.__name__],scoring = score,n_jobs=-1,cv=10)
+            clf = GridSearchCV(algorithm(), param_grid = GRID_VALUES[algo.__name__],scoring = score,n_jobs=-1,verbose=1)
             clf.fit(X_train, y_train)
             print(clf.best_params_)
             
@@ -131,6 +136,7 @@ for algo in ALGORITHMS_NAME:
             recall_score_no_optim.append(result_no_optim.get('recall'))
             f1_score_no_optim.append(result_no_optim.get('f1_measure'))
             best_params.append({'params':clf.best_params_,
+                'elapsed_time': time.time() - startTime ,
                 'optim_res':{'precision':result_no_optim.get('precision'),'accuracy':result_no_optim.get('accuracy'),'auc':result_no_optim.get('auc'),'recall':result_no_optim.get('recall'),'f1_measure':result_no_optim.get('f1_measure')},
                 'defaul_res':{'precision':result.get('precision'),'accuracy':result.get('accuracy'),'auc':result.get('auc'),'recall':result.get('recall'),'f1_measure':result.get('f1_measure')},
             })
