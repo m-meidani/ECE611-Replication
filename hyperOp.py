@@ -131,7 +131,7 @@ for algo in ALGORITHMS_NAME:
                                     'f1_measure:': np.median(f1_score)
                                     }
         print("[{}] for {} is {}".format(algo.__name__, project, algorithm_final_result))
-        f = open('./Optimization_results/'+algo.__name__+'__'+project+'.pckl', 'wb')
+        f = open('/Optimization_results/'+algo.__name__+'__'+project+'.pckl', 'wb')
         pickle.dump(algorithm_final_result, f)
         f.close();
 
@@ -154,7 +154,7 @@ for algo in ALGORITHMS_NAME:
                                     'recall:': np.median(recall_score_no_optim), 
                                     'f1_measure:': np.median(f1_score_no_optim)}
         print("[{}] no-optim for {} is {}".format(algo.__name__, project, algorithm_final_result_no_optim))
-        f = open('./Optimization_results/'+algo.__name__+'_no_optim__'+project+'.pckl', 'wb')
+        f = open('/Optimization_results/'+algo.__name__+'_no_optim__'+project+'.pckl', 'wb')
         pickle.dump(algorithm_final_result_no_optim, f)
         f.close();
 
