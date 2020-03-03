@@ -1,6 +1,7 @@
 
 import warnings
 warnings.filterwarnings('ignore')
+from sklearn.exceptions import FitFailedWarning
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import classification_report
 import numpy as np
@@ -76,14 +77,16 @@ for algo in ALGORITHMS_NAME:
                 'leaf_size':[*list(range(10,50,10))],
             },
             doLR.__name__:{
-                'penalty':['l1', 'l2', 'elasticnet'],
-                'dual':[True,False],
                 'tol':[1e-5,1e-4,1e-3,1e-2,1e-1], #
                 'C': [0.001, 0.1, 1, 10, 100], #
                 'fit_intercept':[True,False], 
-                'solver':['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'], 
+                'solver':[ 'liblinear', 'saga'], 
+                ## 'penalty':[ 'l2' ],
+                ## 'solver':[ 'lbfgs','sag','newton-cg'], 
                 'max_iter':[50,100,150,200],
-                'l1_ratio':[1e-5,1e-3,1e-1,0.5],
+                # 'l1_ratio':[1e-5,1e-3,1e-1,0.5],
+                # 'penalty':['elasticnet'],
+                'penalty':['l1', 'l2' ],
             },
             doRF.__name__:{
                 'n_estimators':[*list(range(10,50,10))], ##
@@ -116,8 +119,13 @@ for algo in ALGORITHMS_NAME:
             i+=1
             print('round:',i)
             X_train, X_test, y_train, y_test = dataSet.components[train_index], dataSet.components[test_index], dataSet.target[train_index], dataSet.target[test_index]    
-            clf = GridSearchCV(algorithm(), param_grid = GRID_VALUES[algo.__name__],scoring = score,n_jobs=-1,verbose=1)
-            clf.fit(X_train, y_train)
+            clf = GridSearchCV(algorithm(), param_grid = GRID_VALUES[algo.__name__],scoring = score,n_jobs=-1,verbose=1,)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore",category=FitFailedWarning)
+                try:
+                    clf.fit(X_train, y_train)
+                except:
+                    continue
             print(clf.best_params_)
             
             #testing with optimized params
