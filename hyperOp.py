@@ -61,16 +61,16 @@ for algo in ALGORITHMS_NAME:
             doCART.__name__:{
                 'criterion':['gini','entropy'],
                 'splitter':['best', 'random'],
-                'min_samples_split':[2,4,6,8,10],
-                'min_samples_leaf':[1,2,3,4,5,6],
+                'min_samples_split':[2,5,8,10,50,100],
+                'min_samples_leaf':[1,3,6,10,50,100],
                 'min_weight_fraction_leaf':[0.0001, 0.001, 0.01, 0.1, 0.3, 0.49],
-                'max_features': ['log2','sqrt',None,2,4,6],
+                'max_features': ['log2','sqrt',None,4,6,9,11],
                 # 'max_features': ['log2','sqrt',None,*list(range(1,dataSet.components.shape[1],2))],
             },
             doNB.__name__:{
             },
             doKNN.__name__:{
-                'n_neighbors':[*list(range(1,max(int(dataSet.components.shape[0]**(0.5)),17),4))],
+                'n_neighbors':[*list(range(1,max(int(dataSet.components.shape[0]**(0.5)),17),4))], #
                 'weights':['uniform','distance'],
                 'algorithm':['auto', 'ball_tree', 'kd_tree', 'brute'],
                 'leaf_size':[*list(range(10,50,10))],
@@ -78,21 +78,22 @@ for algo in ALGORITHMS_NAME:
             doLR.__name__:{
                 'penalty':['l1', 'l2', 'elasticnet'],
                 'dual':[True,False],
-                'tol':[1e-5,1e-4,1e-3,1e-2,1e-1],
-                'C': [0.001, 0.1, 1, 10, 100, 1000],
-                'fit_intercept':[True,False],
-                'solver':['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'],
+                'tol':[1e-5,1e-4,1e-3,1e-2,1e-1], #
+                'C': [0.001, 0.1, 1, 10, 100, 1000], #
+                'fit_intercept':[True,False], 
+                'solver':['newton-cg', 'lbfgs', 'liblinear', 'sag', 'saga'], 
                 'max_iter':[50,100,150,200],
-                'multi_class':['auto', 'ovr', 'multinomial'],
                 'l1_ratio':[1e-5,1e-3,1e-1,0.2,0.5],
             },
             doRF.__name__:{
-                'n_estimators':[*list(range(10,50,10))],
+                'n_estimators':[*list(range(10,50,10))], ##
                 'criterion':['gini','entropy'],
-                'min_samples_split':[2,4,6,8,10],
-                'min_samples_leaf':[1,2,3,4,5,6],
-                'min_weight_fraction_leaf':[0.0001, 0.001, 0.01, 0.1, 0.3, 0.49],
-                'max_features': ['log2','sqrt',None,2,4,6],
+                'min_samples_split':[2,5,8,10,50,100],
+                # 'min_samples_split':[2,4,6,8,10], #
+                'min_samples_leaf':[1,3,6,10,50,100],
+                # 'min_samples_leaf':[1,2,3,4,5,6],   #
+                'min_weight_fraction_leaf':[0.0001, 0.001, 0.01, 0.1, 0.3, 0.49], 
+                'max_features': ['log2','sqrt',None,4,6,9,11],
             }
         }
         precision_score = []
