@@ -6,14 +6,14 @@ from sklearn import metrics
 from sklearn import preprocessing
 
 
-def doRF(X_train, X_test, y_train, y_test, report=False):
+def doRF(X_train, X_test, y_train, y_test, report=False,params={}):
     scores_list = []
     precision_score = []
     auc_score = []
     recall_score = []
     f1_score = []
 
-    rf = RandomForestClassifier()
+    rf = RandomForestClassifier(**params)
     rf.fit(X_train, y_train)
     y_pred = rf.predict(X_test)
     precision_score.append(metrics.precision_score(y_test,y_pred))

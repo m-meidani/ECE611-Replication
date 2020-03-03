@@ -8,7 +8,7 @@ from sklearn import preprocessing
 from sklearn import metrics
 
 
-def doNB(X_train, X_test, y_train, y_test, report=False):
+def doNB(X_train, X_test, y_train, y_test, report=False,params={}):
     scores_list = []
     precision_score = []
     auc_score = []

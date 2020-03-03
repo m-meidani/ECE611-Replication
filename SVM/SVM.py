@@ -7,13 +7,15 @@ from sklearn import preprocessing
 from sklearn import metrics
 
 
-def doSVM(X_train, X_test, y_train, y_test, report=False):
+def doSVM(X_train, X_test, y_train, y_test, report=False, params={}):
     scores_list = []
     precision_score = []
     auc_score = []
     recall_score = []
     f1_score = []
-    clf = svm.SVC(kernel='linear')  # Linear Kernel
+    if params.keys().__len__==0:
+        params['kernel']='linear';
+    clf = svm.SVC(**params)  
     clf.fit(X_train, y_train)
 
     y_pred = clf.predict(X_test)

@@ -6,13 +6,14 @@ import pandas as pd
 from sklearn.decomposition import KernelPCA
 from sklearn.preprocessing import PowerTransformer, StandardScaler
 import numpy as np
+import pickle
 import matplotlib.pyplot as plt
 
 PROJECT_FILE_NAME = {
     'Mirantis' : 'IST_MIR.csv',
     'Mozilla'  : 'IST_MOZ.csv',
     'Openstack': 'IST_OST.csv',
-    'Wikimedia': 'IST_WIK.csv'
+    'Wikimedia': 'IST_WIK.csv',
     'MinedData': ['MinedData.pckl','ValidMinedData.pckl'],
 }
 

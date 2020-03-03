@@ -3,8 +3,9 @@ from sklearn import metrics
 import numpy as np
 
 
-def doCART(X_train, X_test, y_train, y_test, report=False):
-    model = DecisionTreeClassifier().fit(X_train, y_train)
+def doCART(X_train, X_test, y_train, y_test, report=False,params={}):
+
+    model = DecisionTreeClassifier(**params).fit(X_train, y_train)
     y_pred = model.predict(X_test)
     if report:
         print('number of classes', model.n_classes_)

@@ -35,7 +35,7 @@ minedData = minedData.drop(['ID','defect_status'],axis=1)
 validMinedData = validMinedData.drop(['ID','defect_status'],axis=1)
 for key in minedData.keys(): 
     print(key)
-    totalData[key]=[validMinedData[key],minedData[key]]
+    totalData[key]=[minedData[key],validMinedData[key]]
     sns.boxplot(data=totalData[key], orient="h", palette="Set2",ax=axs[int(index/4)][index%4]).set(xlabel=key, ylabel='defect')
     index+=1
 # sns.boxplot(x='value',y='valida scripts', data=validMinedData["Attribute"], ax=axs[0])

@@ -10,7 +10,7 @@ from sklearn import metrics
 # X = wine.drop('Cultivator',axis=1)
 # y = wine['Cultivator']
 #train-test  split
-def doANN(X_train, X_test, y_train, y_test, externalTest=False ,report=False):
+def doANN(X_train, X_test, y_train, y_test, externalTest=False ,report=False,params={}):
     #preprocess
     scaler=StandardScaler()
     scaler.fit(X_train)
@@ -18,8 +18,10 @@ def doANN(X_train, X_test, y_train, y_test, externalTest=False ,report=False):
     X_train = scaler.transform(X_train)
     X_test = scaler.transform(X_test)
 
+    if params.keys().__len__ == 0:
+        params={'hidden_layer_sizes':(13,13,13),'max_iter':500}
     #training
-    mlp = MLPClassifier(hidden_layer_sizes=(13,13,13),max_iter=500)
+    mlp = MLPClassifier(**params)
     mlp.fit(X_train,y_train)
     
     #prediction
