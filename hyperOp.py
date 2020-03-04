@@ -195,8 +195,8 @@ for algo in ALGORITHMS_NAME:
                                     'auc:': np.median(auc_score_no_optim), 
                                     'recall:': np.median(recall_score_no_optim), 
                                     'f1_measure:': np.median(f1_score_no_optim),
-                                    'auc_sd':np.std(auc_score),
-                                    'auc_avg':np.average(auc_score)
+                                    'auc_sd':np.std(auc_score_no_optim),
+                                    'auc_avg':np.average(auc_score_no_optim)
                                     }                                            
         #saaving data
         print("[{}] for {} is {}".format(algo.__name__, project, algorithm_final_result))
