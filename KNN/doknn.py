@@ -13,7 +13,8 @@ def doKNN(X_train, X_test, y_train, y_test):
     # plot_hist(dataSet.data)
     # X_train,X_test,y_train,y_test = train_test_split(knnData,dataSet.target,test_size=0.2,random_state=4)
     cv = KFold(n_splits=10)
-    k_range = range(1, 26)
+    #k_range = range(1, 26)
+    k_range = 3
     scores_list = []
 
     precision_score = []
