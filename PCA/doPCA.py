@@ -78,8 +78,11 @@ def getData(projectName, appDirectory):
         # print(data.keys());
     return data
 
-def applyPCA(projectName, appDirectory):
-    return doPCA(getData(projectName, appDirectory), CSV_FEATURE_COLUMNS, CSV_TARGET_COLUMNS, False)
+def applyPCA(projectName=False, appDirectory='.',rawData=False):
+    if type(rawData) == type(False):
+        return doPCA(getData(projectName, appDirectory), CSV_FEATURE_COLUMNS, CSV_TARGET_COLUMNS, False)
+    else:
+        return doPCA(rawData, CSV_FEATURE_COLUMNS, CSV_TARGET_COLUMNS, False)
 
 def applyPCAWithStandardize(projectName, appDirectory):
     return doPCA(getData(projectName, appDirectory), CSV_FEATURE_COLUMNS, CSV_TARGET_COLUMNS, False, False, False, True)

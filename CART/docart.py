@@ -29,4 +29,4 @@ def doCART(X_train, X_test, y_train, y_test, report=False,params={}):
         print("recall_score:", recall_score)
         print("f1_score:", f1_score)
     # now we get the medians
-    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score, 'algorithm' : model}
+    return {'precision': precision_score, 'accuracy': scores_list, 'auc': auc_score, 'recall': recall_score, 'f1_measure': f1_score, 'algorithm' : model,'balanced_accuracy':metrics.balanced_accuracy_score(y_test,y_pred)}
