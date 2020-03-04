@@ -35,8 +35,8 @@ import os
 
 PRINCIPLE_COMPONENT_FINDER = applyPCA
 PROJECTS = [ 'Mozilla','Openstack','Mirantis', 'Wikimedia']
-score = 'roc_auc'
-# score = 'balanced_accuracy'
+# score = 'roc_auc'
+score = 'balanced_accuracy'
 ALGORITHMS_NAME=[doCART]#,doKNN,doNB,doRF,doLR]
 ALGORITHMS = { 
     doCART.__name__: DecisionTreeClassifier, 
