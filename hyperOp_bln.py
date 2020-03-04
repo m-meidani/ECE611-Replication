@@ -198,20 +198,20 @@ for algo in ALGORITHMS_NAME:
                                     'auc_sd':np.std(auc_score),
                                     'auc_avg':np.average(auc_score)
                                     }                                            
-#         #saaving data
-#         print("[{}] for {} is {}".format(algo.__name__, project, algorithm_final_result))
-#         f = open('./Optimization_results/'+algo.__name__+'__'+project+'_params.pckl', 'wb')
-#         print(len(best_params))
-#         pickle.dump(best_params, f)
-#         f.close();
-#         f = open('./Optimization_results/'+algo.__name__+'__'+project+'.pckl', 'wb')
-#         pickle.dump(algorithm_final_result, f)
-#         f.close();
-#         print("[{}] no-optim for {} is {}".format(algo.__name__, project, algorithm_final_result_no_optim))
-#         f = open('./Optimization_results/'+algo.__name__+'_no_optim__'+project+'.pckl', 'wb')
-#         pickle.dump(algorithm_final_result_no_optim, f)
-#         f.close();
+        #saaving data
+        print("[{}] for {} is {}".format(algo.__name__, project, algorithm_final_result))
+        f = open('./Optimization_results_bln/'+algo.__name__+'__'+project+'_params.pckl', 'wb')
+        print(len(best_params))
+        pickle.dump(best_params, f)
+        f.close();
+        f = open('./Optimization_results_bln/'+algo.__name__+'__'+project+'.pckl', 'wb')
+        pickle.dump(algorithm_final_result, f)
+        f.close();
+        print("[{}] no-optim for {} is {}".format(algo.__name__, project, algorithm_final_result_no_optim))
+        f = open('./Optimization_results_bln/'+algo.__name__+'_no_optim__'+project+'.pckl', 'wb')
+        pickle.dump(algorithm_final_result_no_optim, f)
+        f.close();
 
-# f = open('./Optimization_results/finished.pckl', 'wb')
-# pickle.dump("enjoy the results!", f)
-# f.close();
+f = open('./Optimization_results_bln/finished.pckl', 'wb')
+pickle.dump("enjoy the results!", f)
+f.close();
