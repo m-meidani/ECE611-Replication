@@ -34,7 +34,7 @@ import pickle
 import os
 
 PRINCIPLE_COMPONENT_FINDER = applyPCA
-PROJECTS = [ 'Mirantis', 'Wikimedia'] #'Mozilla','Openstack'
+PROJECTS = [ 'Mirantis', 'Wikimedia','Mozilla','Openstack']
 score = 'roc_auc'
 # score = 'balanced_accuracy'
 ALGORITHMS_NAME=[doLR,doCART,doKNN,doNB,doRF]
