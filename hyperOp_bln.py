@@ -34,10 +34,10 @@ import pickle
 import os
 
 PRINCIPLE_COMPONENT_FINDER = applyPCA
-PROJECTS = [ 'Mozilla','Openstack','Mirantis', 'Wikimedia']
-# score = 'roc_auc'
+PROJECTS = [ 'Mirantis', 'Wikimedia','Mozilla','Openstack']
 score = 'balanced_accuracy'
-ALGORITHMS_NAME=[doCART,doKNN,doNB,doRF,doLR]
+# score = 'balanced_accuracy'
+ALGORITHMS_NAME=[doLR,doCART,doKNN,doNB,doRF]
 ALGORITHMS = { 
     doCART.__name__: DecisionTreeClassifier, 
     doNB.__name__: GaussianNB,  
@@ -63,6 +63,7 @@ for algo in ALGORITHMS_NAME:
         auc_score_no_optim = []
         recall_score_no_optim = []
         f1_score_no_optim = []
+        best_params=[];
         for boostrap_index in range(0,100):
             # bootstraping
             startTime=time.time()
@@ -80,7 +81,6 @@ for algo in ALGORITHMS_NAME:
             #finish bootstraping
             print("# Tuning hyper-parameters->goal {} for {} and {} project".format(score,algo.__name__,project))
             print()
-            best_params=[];
             algorithm = ALGORITHMS[algo.__name__]
             dataSet,DimensionReductionModel = PRINCIPLE_COMPONENT_FINDER(rawData=train_data,appDirectory= appDirectory)
             test_data_pc = DimensionReductionModel.transform(test_data.iloc[:,:12])
@@ -112,13 +112,13 @@ for algo in ALGORITHMS_NAME:
                     'tol':[1e-5,1e-4,1e-3,1e-2,1e-1], #
                     'C': [0.001, 0.1, 1, 10, 100], #
                     'fit_intercept':[True,False], 
-                    'solver':[ 'liblinear', 'saga'], 
-                    ## 'penalty':[ 'l2' ],
-                    ## 'solver':[ 'lbfgs','sag','newton-cg'], 
+                    # 'solver':[ 'liblinear', 'saga'], 
+                    'penalty':[ 'l2' ],
+                    'solver':[ 'lbfgs','sag','newton-cg'], 
                     'max_iter':[50,100,150,200],
                     # 'l1_ratio':[1e-5,1e-3,1e-1,0.5],
                     # 'penalty':['elasticnet'],
-                    'penalty':['l1', 'l2' ],
+                    # 'penalty':['l1', 'l2' ],
                 },
                 doRF.__name__:{
                     'n_estimators':[*list(range(10,50,10))], ##
@@ -176,11 +176,11 @@ for algo in ALGORITHMS_NAME:
             auc_score_no_optim.append(result_no_optim.get('auc'))
             recall_score_no_optim.append(result_no_optim.get('recall'))
             f1_score_no_optim.append(result_no_optim.get('f1_measure'))
-        best_params.append({'params':clf.best_params_,
-            'elapsed_time': time.time() - startTime ,
-            'optim_res':{'precision':result_no_optim.get('precision'),'accuracy':result_no_optim.get('accuracy'),'auc':result_no_optim.get('auc'),'recall':result_no_optim.get('recall'),'f1_measure':result_no_optim.get('f1_measure')},
-            'defaul_res':{'precision':metrics.precision_score(y_test, y_pred),'accuracy':metrics.accuracy_score(y_test, y_pred),'auc':auc_score_op,'recall':metrics.recall_score(y_test, y_pred),'f1_measure':metrics.f1_score(y_test, y_pred)},
-        })
+            best_params.append({'params':clf.best_params_,
+                'elapsed_time': time.time() - startTime ,
+                'optim_res':{'precision':result_no_optim.get('precision'),'accuracy':result_no_optim.get('accuracy'),'auc':result_no_optim.get('auc'),'recall':result_no_optim.get('recall'),'f1_measure':result_no_optim.get('f1_measure')},
+                'defaul_res':{'precision':metrics.precision_score(y_test, y_pred),'accuracy':metrics.accuracy_score(y_test, y_pred),'auc':auc_score_op,'recall':metrics.recall_score(y_test, y_pred),'f1_measure':metrics.f1_score(y_test, y_pred)},
+            })
 
         algorithm_final_result = {'precision:': np.median(precision_score), 
                                     'accuracy:': np.median(scores_list), 
@@ -200,18 +200,18 @@ for algo in ALGORITHMS_NAME:
                                     }                                            
         #saaving data
         print("[{}] for {} is {}".format(algo.__name__, project, algorithm_final_result))
-        f = open('./Optimization_results_bln/'+algo.__name__+'__'+project+'_params.pckl', 'wb')
-        print(len(best_params))
+        f = open('./Optimization_results/'+algo.__name__+'__'+project+'_params.pckl', 'wb')
         pickle.dump(best_params, f)
         f.close();
-        f = open('./Optimization_results_bln/'+algo.__name__+'__'+project+'.pckl', 'wb')
+        print(best_params)
+        f = open('./Optimization_results/'+algo.__name__+'__'+project+'.pckl', 'wb')
         pickle.dump(algorithm_final_result, f)
         f.close();
         print("[{}] no-optim for {} is {}".format(algo.__name__, project, algorithm_final_result_no_optim))
-        f = open('./Optimization_results_bln/'+algo.__name__+'_no_optim__'+project+'.pckl', 'wb')
+        f = open('./Optimization_results/'+algo.__name__+'_no_optim__'+project+'.pckl', 'wb')
         pickle.dump(algorithm_final_result_no_optim, f)
         f.close();
 
-f = open('./Optimization_results_bln/finished.pckl', 'wb')
+f = open('./Optimization_results/finished.pckl', 'wb')
 pickle.dump("enjoy the results!", f)
-f.close();
+f.close()
