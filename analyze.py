@@ -12,6 +12,7 @@ from NaiveBayes.NB import doNB
 from CART.docart import doCART
 from LR.dolr import doLR
 from KNN.doknn import doKNN
+<<<<<<< Updated upstream
 from SVM.SVM import doSVM
 from extensions.ANN.doann import doANN
 from SVM.SVM import doSVM
@@ -99,3 +100,20 @@ for project in PROJECTS:
                                     'external test f1_measure:': np.median(ext_f1_score)
                                     }
             print("External Validity [{}] for the model trained by {} is {}".format(algorithm.__name__, project, ext_algorithm_final_result))
+from CART.docart import doCART
+
+dataSetMIR = applyPCA('Mirantis', '.')
+dataSetMOZ = applyPCA('Mozilla', '.')
+dataSetOST = applyPCA('Openstack', '.')
+dataSetWIK = applyPCA('Wikimedia', '.')
+# -------------CART
+print("Mirantis:", doCART(dataSetMIR))
+print("Mozilla:", doCART(dataSetMOZ))
+print("Openstack:", doCART(dataSetOST))
+print("Wikimedia:", doCART(dataSetWIK))
+
+# -------------KNN
+print("Mirantis:", doKNN(dataSetMIR))
+print("Mozilla:", doKNN(dataSetMOZ))
+print("Openstack:", doKNN(dataSetOST))
+print("Wikimedia:", doKNN(dataSetWIK))
