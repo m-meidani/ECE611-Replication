@@ -17,7 +17,7 @@ import os
 appDirectory='.'
 PROJECTS = [ 'Mozilla', 'Openstack', 'Wikimedia','Mirantis',]
 scores = ['roc_auc']
-ALGORITHMS_NAME=[doRF,doKNN,doCART,doNB,doLR]
+ALGORITHMS_NAME=[doCART,doRF,doKNN,doNB,doLR]
 
 ALGORITHMS = { 
     doCART.__name__: DecisionTreeClassifier, 
@@ -27,10 +27,10 @@ ALGORITHMS = {
  }
 for algorithm in ALGORITHMS_NAME:
     for project in PROJECTS:
-        f = open('./run_data/{}__{}.pckl'.format(algorithm.__name__,project), 'rb')
+        f = open('./Optimization_results/{}__{}_params.pckl'.format(algorithm.__name__,project), 'rb')
         print('op-',project,'-',algorithm.__name__,'=>',pickle.load(f))
         f.close()
 
-        f = open('./run_data/{}_no_optim__{}.pckl'.format(algorithm.__name__,project), 'rb')
+        f = open('./Optimization_results/{}_no_optim__{}.pckl'.format(algorithm.__name__,project), 'rb')
         print('def-',project,'-',algorithm.__name__,'=>',pickle.load(f))
         f.close()
